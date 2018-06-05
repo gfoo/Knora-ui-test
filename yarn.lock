@@ -175,6 +175,12 @@
   dependencies:
     tslib "^1.9.0"
 
+"@knora/core@^1.0.0-alpha":
+  version "1.0.0-alpha"
+  resolved "https://registry.yarnpkg.com/@knora/core/-/core-1.0.0-alpha.tgz#c3a9810b21a0cc6f1ab44276af5f3f7970580eb9"
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngtools/webpack@6.0.7":
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-6.0.7.tgz#e396330756c1d8999abc224aeb23d0011662f77b"
