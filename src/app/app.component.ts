@@ -15,7 +15,7 @@ export class Thing {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  resources$: Observable<Thing[]>;
+  things$: Observable<Thing[]>;
 
   gravQuery = `
 PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
@@ -35,7 +35,7 @@ CONSTRUCT {
 
   constructor(private http: HttpClient) {}
   ngOnInit() {
-    this.resources$ = this.http
+    this.things$ = this.http
       .get<Thing[]>(
         environment.api +
           '/v2/searchextended/' +
