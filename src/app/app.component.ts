@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ConvertJSONLD, ReadResource } from '@knora/core';
 import { Observable } from 'rxjs';
 import { map, mergeAll, toArray } from 'rxjs/operators';
 import { environment } from '../environments/environment';
