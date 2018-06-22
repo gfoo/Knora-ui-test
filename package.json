@@ -23,7 +23,9 @@
     "@knora/core": "^1.0.0-alpha",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "json2typescript": "^1.0.5",
+    "jsonld": "^1.0.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.6",
