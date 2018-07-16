@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ConvertJSONLD, ReadResource } from '@knora/core';
 import { Observable } from 'rxjs';
-import { map, mergeAll, toArray } from 'rxjs/operators';
+import { map, mergeAll, tap, toArray } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 
 export class Thing {
   id: string;
+  label: string;
   text: string;
 }
 
@@ -43,19 +44,23 @@ CONSTRUCT {
           encodeURIComponent(this.gravQuery)
       )
       .pipe(
-        // tap(console.log),
+        tap(console.log),
         map(
           jsonld =>
             ConvertJSONLD.createReadResourcesSequenceFromJsonLD(jsonld)
               .resources
         ),
         mergeAll(),
-        // tap(console.log),
+        tap(r => console.log(r, r.properties)),
         map(
           (res: ReadResource) =>
             ({
               id: res.id,
-              text: '?' // FIXME: get hasText value from resource
+              label: res.label,
+              text:
+                'anything:hasText' in res.properties
+                  ? res.properties['anything:hasText'].values[0]
+                  : null
             } as Thing)
         ),
         toArray()

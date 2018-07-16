@@ -4,6 +4,6 @@
 
 <ul>
   <li *ngFor="let thing of things$ | async">
-    {{thing.id}} - {{thing.text}}
+    ID: {{thing.id}} | LABEL: {{thing.label}} | TEXT: {{thing.text}}
   </li>
 </ul>
