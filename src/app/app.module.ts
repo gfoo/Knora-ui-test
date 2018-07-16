@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     KuiCoreModule.forRoot({
+      name: 'Knora-ui-test',
       api: environment.api,
       media: environment.media,
       app: environment.app

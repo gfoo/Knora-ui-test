@@ -20,11 +20,11 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
-    "@knora/core": "^1.0.0-alpha",
+    "@knora/core": "^1.0.3-alpha",
     "core-js": "^2.5.4",
+    "json2typescript": "^1.0.5",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26",
-    "json2typescript": "^1.0.5",
     "jsonld": "^1.0.2"
   },
   "devDependencies": {
