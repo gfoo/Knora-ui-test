@@ -2,10 +2,15 @@
     {{gravQuery}}
 </pre>
 
-<ul>
-  <li>ID | label | text</li>
-  <li *ngFor="let thing of things$ | async">
-    {{thing.id}} | {{thing.label}} |
-    {{thing.text}}
-  </li>
-</ul>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>label</th>
+    <th>text</th>
+  </tr>
+  <tr *ngFor="let thing of things$ | async">
+    <td>{{thing.id}}</td>
+    <td>{{thing.label}}</td>
+    <td>{{thing.text}}</td>
+  </tr>
+</table>

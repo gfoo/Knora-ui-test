@@ -61,9 +61,9 @@ CONSTRUCT {
         concatAll(),
         map((resources: ReadResource[]) =>
           resources.map(res => {
-            let text = 'NO VALUE';
+            let text = 'Ø';
             if (res.properties[this.thingIri + '#hasText']) {
-              text = res.properties[this.thingIri + '#hasText'][0].str;
+              text = res.properties[this.thingIri + '#hasText'][0]['str'];
             }
             return {
               id: res.id,
