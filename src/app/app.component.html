@@ -3,7 +3,9 @@
 </pre>
 
 <ul>
+  <li>ID | label | text</li>
   <li *ngFor="let thing of things$ | async">
-    ID: {{thing.id}} | LABEL: {{thing.label}} | TEXT: {{thing.text}}
+    {{thing.id}} | {{thing.label}} |
+    {{thing.text}}
   </li>
 </ul>

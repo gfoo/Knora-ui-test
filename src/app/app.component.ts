@@ -2,8 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ConvertJSONLD, ReadResource } from '@knora/core';
 import { Observable } from 'rxjs';
-import { map, mergeAll, tap, toArray } from 'rxjs/operators';
+import { concatAll, map } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+
+declare let require: any;
+const jsonld = require('jsonld');
 
 export class Thing {
   id: string;
@@ -18,6 +21,8 @@ export class Thing {
 })
 export class AppComponent implements OnInit {
   things$: Observable<Thing[]>;
+
+  thingIri = 'http://0.0.0.0:3333/ontology/0001/anything/v2';
 
   gravQuery = `
 PREFIX knora-api: <http://api.knora.org/ontology/knora-api/simple/v2#>
@@ -44,26 +49,29 @@ CONSTRUCT {
           encodeURIComponent(this.gravQuery)
       )
       .pipe(
-        tap(console.log),
-        map(
-          jsonld =>
-            ConvertJSONLD.createReadResourcesSequenceFromJsonLD(jsonld)
-              .resources
-        ),
-        mergeAll(),
-        tap(r => console.log(r, r.properties)),
-        map(
-          (res: ReadResource) =>
-            ({
+        map(jsonldReturned => {
+          return jsonld.promises
+            .compact(jsonldReturned, {})
+            .then(
+              compacted =>
+                ConvertJSONLD.createReadResourcesSequenceFromJsonLD(compacted)
+                  .resources
+            );
+        }),
+        concatAll(),
+        map((resources: ReadResource[]) =>
+          resources.map(res => {
+            let text = 'NO VALUE';
+            if (res.properties[this.thingIri + '#hasText']) {
+              text = res.properties[this.thingIri + '#hasText'][0].str;
+            }
+            return {
               id: res.id,
               label: res.label,
-              text:
-                'anything:hasText' in res.properties
-                  ? res.properties['anything:hasText'].values[0]
-                  : null
-            } as Thing)
-        ),
-        toArray()
+              text: text
+            } as Thing;
+          })
+        )
       );
   }
 }
